@@ -21,12 +21,18 @@ namespace OSMRoutingClient
             return base_url + endpoint + "?api_key=" + api_key;
         }
         
-        public object getRoute(Position start, Position end)
+        public Position[] getRoute(Position start, Position end)
         {
             string url = getUrl("v2/directions/foot-walking") + "&start=" + start.getLatitudeString() + "," + start.getLongitudeString() + "&end=" + end.getLatitudeString() + "," + end.getLongitudeString();
             
             string json = client.GetStringAsync(url).Result;
-            return JsonConvert.DeserializeObject(json);
+            dynamic o = JsonConvert.DeserializeObject(json);
+            List<Position> positions = new List<Position>();
+            foreach (var step in o.features[0].geometry.coordinates)
+            {
+                positions.Add(new Position(step[1].ToObject<double>(), step[0].ToObject<double>()));
+            }
+            return positions.ToArray();
         }
 
         public Position getPosition(string query)
