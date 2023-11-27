@@ -13,15 +13,29 @@ namespace OSMRoutingClient
     public class OSMRoutingClient
     {
         private static string api_key = "5b3ce3597851110001cf6248ba0ea999ab9e47e39f4ae0415f4840e3";
-        private string base_url = "https://api.openrouteservice.org/v2/directions/cycling-road?api_key=" + api_key;
+        private string base_url = "https://api.openrouteservice.org/";
         static readonly HttpClient client = new HttpClient();
+
+        public string getUrl(string endpoint)
+        {
+            return base_url + endpoint + "?api_key=" + api_key;
+        }
         
         public Route getRoute(Position start, Position end)
         {
-            string url = base_url + "&start=" + start.getLatitude() + "," + start.getLongitude() + "&end=" + end.getLatitude() + "," + end.getLongitude();
-            // decode json
+            string url = getUrl("v2/directions/foot-walking") + "&start=" + start.getLatitudeString() + "," + start.getLongitudeString() + "&end=" + end.getLatitudeString() + "," + end.getLongitudeString();
+            
             string json = client.GetStringAsync(url).Result;
             return JsonSerializer.Deserialize<Route>(json);
+        }
+
+        public Route getPosition(string query)
+        {
+            string url = getUrl("geocode/search") + "&text=" + query;
+            Console.WriteLine(url);
+            string json = client.GetStringAsync(url).Result;
+            return JsonSerializer.Deserialize<Route>(json);
+            
         }
     }
     
@@ -44,6 +58,16 @@ namespace OSMRoutingClient
         public double getLongitude()
         {
             return this.longitude;
+        }
+        
+        public string getLatitudeString()
+        {
+            return this.latitude.ToString().Replace(",", ".");
+        }
+        
+        public string getLongitudeString()
+        {
+            return this.longitude.ToString().Replace(",", ".");
         }
     }
     
