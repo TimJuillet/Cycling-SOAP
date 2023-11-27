@@ -25,6 +25,8 @@ namespace OSMRoutingClient
         {
             string url = getUrl("v2/directions/foot-walking") + "&start=" + start.getLatitudeString() + "," + start.getLongitudeString() + "&end=" + end.getLatitudeString() + "," + end.getLongitudeString();
             
+            Console.WriteLine(url);
+            
             string json = client.GetStringAsync(url).Result;
             dynamic o = JsonConvert.DeserializeObject(json);
             List<Position> positions = new List<Position>();
@@ -42,7 +44,7 @@ namespace OSMRoutingClient
             Console.WriteLine(url);
             string json = client.GetStringAsync(url).Result;
             dynamic o = JsonConvert.DeserializeObject(json);
-            return new Position(o.features[0].geometry.coordinates[1].ToObject<double>(), o.features[0].geometry.coordinates[0].ToObject<double>());
+            return new Position(o.features[0].geometry.coordinates[0].ToObject<double>(), o.features[0].geometry.coordinates[1].ToObject<double>());
         }
     }
     

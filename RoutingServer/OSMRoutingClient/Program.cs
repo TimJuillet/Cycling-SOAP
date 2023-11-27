@@ -12,9 +12,13 @@ namespace OSMRoutingClient
         {
             OSMRoutingClient client = new OSMRoutingClient();
             Position start = client.getPosition("56 chemin de l'adrech 06530");
-            Position end = client.getPosition("1 rue de la république 06530");
+            Position end = client.getPosition("930 Route des Colles 06410 Biot");
             
-            Console.WriteLine("Start: " + start.getLatitudeString() + ", " + start.getLongitudeString());
+            List<Position> positions = client.getRoute(start, end);
+            foreach (Position position in positions)
+            {
+                Console.WriteLine(position.getLatitudeString() + ", " + position.getLongitudeString());
+            }
         }
     }
 }
