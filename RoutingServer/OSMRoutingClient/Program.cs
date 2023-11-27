@@ -18,8 +18,8 @@ namespace OSMRoutingClient
             //Route route = client.getRoute(start, end);
             //Console.WriteLine(route.features[0].geometry.coordinates[0][0]);
             
-            Route route = client.getPosition("Nice");
-            Console.WriteLine(route.features[0].geometry.coordinates[0][0]);
+            Position position = client.getPosition("56 chemin de l'adrech 06530");
+            Console.WriteLine(position);
         }
     }
 }
