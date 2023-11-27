@@ -11,8 +11,8 @@ namespace OSMRoutingClient
         static void Main(string[] args)
         {
             OSMRoutingClient client = new OSMRoutingClient();
-            Position start = new Position(48.853, 2.35);
-            Position end = new Position(48.858, 2.294);
+            Position start = new Position(43.61570, 7.07136);
+            Position end = new Position(43.58998, 7.12431);
             Route route = client.getRoute(start, end);
             Console.WriteLine(route.features[0].geometry.coordinates[0][0]);
         }

@@ -1,19 +1,22 @@
-﻿using System;
+﻿using OSMRoutingClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 
+
 namespace RoutingServer
 {
     // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service1" à la fois dans le code et le fichier de configuration.
-    public class Service1 : IService1
-    {
-        public string GetData(int value)
+    public class Service1 : IService1 { 
+
+        public Route GetTrajet(String start, String end)
         {
-            return string.Format("You entered: {0}", value);
+            return new Route();
         }
+
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {

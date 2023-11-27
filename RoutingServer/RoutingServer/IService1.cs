@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OSMRoutingClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -11,11 +12,9 @@ namespace RoutingServer
     [ServiceContract]
     public interface IService1
     {
-        [OperationContract]
-        string GetData(int value);
 
         [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
+        Route GetTrajet(String start, String end);
 
         // TODO: ajoutez vos opérations de service ici
     }
