@@ -11,6 +11,7 @@ using static System.Collections.Specialized.BitVector32;
 namespace OSMRoutingClient
 {
     public class OSMRoutingClient
+        
     {
         private static string api_key = "5b3ce3597851110001cf6248ba0ea999ab9e47e39f4ae0415f4840e3";
         private string base_url = "https://api.openrouteservice.org/";
@@ -83,6 +84,23 @@ namespace OSMRoutingClient
         public string getLongitudeString()
         {
             return this.longitude.ToString().Replace(",", ".");
+        }
+        
+        public double distance(Position position)
+        {
+            double R = 6371e3; // metres
+            double φ1 = this.latitude * Math.PI/180; // φ, λ in radians
+            double φ2 = position.getLatitude() * Math.PI/180;
+            double Δφ = (position.getLatitude()-this.latitude) * Math.PI/180;
+            double Δλ = (position.getLongitude()-this.longitude) * Math.PI/180;
+
+            double a = Math.Sin(Δφ/2) * Math.Sin(Δφ/2) +
+                    Math.Cos(φ1) * Math.Cos(φ2) *
+                    Math.Sin(Δλ/2) * Math.Sin(Δλ/2);
+            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1-a));
+
+            double d = R * c; // in metres
+            return d;
         }
     }
 }
