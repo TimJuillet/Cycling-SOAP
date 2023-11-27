@@ -35,8 +35,7 @@ namespace OSMRoutingClient
             Console.WriteLine(url);
             string json = client.GetStringAsync(url).Result;
             dynamic o = JsonConvert.DeserializeObject(json);
-            Console.WriteLine(o.features[0].geometry.coordinates[1].Type);
-            return new Position(o.features[0].geometry.coordinates[1], o.features[0].geometry.coordinates[0]);
+            return new Position(o.features[0].geometry.coordinates[1].ToObject<double>(), o.features[0].geometry.coordinates[0].ToObject<double>());
         }
     }
     
