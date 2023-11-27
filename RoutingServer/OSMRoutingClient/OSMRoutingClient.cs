@@ -102,5 +102,16 @@ namespace OSMRoutingClient
             double d = R * c; // in metres
             return d;
         }
+        
+        public static double distance(List<Position> positions)
+        {
+            double d = 0;
+            for (int i = 0; i < positions.Count - 1; i++)
+            {
+                d += positions[i].distance(positions[i + 1]);
+            }
+
+            return d;
+        }
     }
 }
