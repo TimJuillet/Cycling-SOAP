@@ -11,12 +11,6 @@ namespace JCDecauxClient
 {
     public class JCDecauxClient
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-            GetContracts().Wait();
-            Console.Read();
-        }
 
         static async Task<List<Contract>> GetContracts()
         {

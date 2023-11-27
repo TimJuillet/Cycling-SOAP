@@ -16,8 +16,22 @@ namespace RoutingServer
         [OperationContract]
         List<List<Position>> GetBestTrajet(String start, String end);
 
+        [OperationContract]
+        CompositeType GetDataUsingDataContract(CompositeType composite);
         // TODO: ajoutez vos opérations de service ici
+
     }
+
+    [DataContract]
+    public class Position
+    {
+        [DataMember]
+        public double latitude;
+        [DataMember]
+        public double longitude;
+    }
+
+
 
     // Utilisez un contrat de données comme indiqué dans l'exemple ci-après pour ajouter les types composites aux opérations de service.
     // Vous pouvez ajouter des fichiers XSD au projet. Une fois le projet généré, vous pouvez utiliser directement les types de données qui y sont définis, avec l'espace de noms "RoutingServer.ContractType".

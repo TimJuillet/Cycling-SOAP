@@ -51,5 +51,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OSMRoutingClient\OSMRoutingClient.csproj">
+      <Project>{324c6f70-ef65-4526-b5ec-469cf484c601}</Project>
+      <Name>OSMRoutingClient</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

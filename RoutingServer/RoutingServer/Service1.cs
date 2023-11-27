@@ -17,6 +17,19 @@ namespace RoutingServer
         private static double bikeSpeed = 15;
         private static double walkSpeed = 5;
 
+        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        {
+            if (composite == null)
+            {
+                throw new ArgumentNullException("composite");
+            }
+            if (composite.BoolValue)
+            {
+                composite.StringValue += "Suffix";
+            }
+            return composite;
+        }
+
         List<List<Position>> IService1.GetBestTrajet(String start, String end)
         {
             Station closestToStart = getClosestStationFromPlace(start);
@@ -73,22 +86,6 @@ namespace RoutingServer
             }
             
             return closestStation;
-        }
-
-      
-
-
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
-        {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
         }
     }
 }

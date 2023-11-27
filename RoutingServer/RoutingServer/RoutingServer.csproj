@@ -51,6 +51,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JCDecauxClient\JCDecauxClient.csproj">
+      <Project>{92f02d6e-ba55-4c8a-ad0c-255074c42853}</Project>
+      <Name>JCDecauxClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OSMRoutingClient\OSMRoutingClient.csproj">
+      <Project>{324c6f70-ef65-4526-b5ec-469cf484c601}</Project>
+      <Name>OSMRoutingClient</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <VSToolsPath Condition="'$(VSToolsPath)' == '' and '$(VisualStudioVersion)' != '' and '$(VisualStudioVersion)' != '11.0'">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
