@@ -15,10 +15,11 @@ namespace RoutingServer
         public static OSMRoutingClient.OSMRoutingClient client = new OSMRoutingClient.OSMRoutingClient();
         public static Task<List<Station>> allStations = JCDecauxClient.JCDecauxClient.GetAllStationsFromAllContracts();
 
-        public List<Position> GetTrajet(String start, String end)
+        public List<Position> GetTrajet(String start, String end, String mode)
         {
-            //TODO
-            return null;
+            List<Position> positions = new List<Position>();
+            positions = client.getRoute(client.getPosition(start), client.getPosition(end), mode);
+            return positions;
         }
 
         public Station getClosestStationFromPlace(String place)
@@ -26,10 +27,23 @@ namespace RoutingServer
             // get the position of the place
             // compare the position of the place with the position of all the stations
             // return the closest station
+            double minDistance = 0;
+            Station closestStation = null;
+            Position placePosition = client.getPosition(place);
 
-
-            return null;
+            foreach(Station station in allStations.Result)
+            {
+                double distance = station.position.distance(placePosition);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    closestStation = station;
+                }
+            }
+            
+            return closestStation;
         }
+
 
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)

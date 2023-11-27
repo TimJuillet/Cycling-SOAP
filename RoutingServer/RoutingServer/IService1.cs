@@ -14,7 +14,7 @@ namespace RoutingServer
     {
 
         [OperationContract]
-        List<Position> GetTrajet(String start, String end);
+        List<Position> GetTrajet(String start, String end, String mode);
 
         // TODO: ajoutez vos opérations de service ici
     }
