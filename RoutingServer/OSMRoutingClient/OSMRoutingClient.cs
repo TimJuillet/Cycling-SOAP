@@ -21,9 +21,10 @@ namespace OSMRoutingClient
             return base_url + endpoint + "?api_key=" + api_key;
         }
         
-        public List<Position> getRoute(Position start, Position end)
+        
+        public List<Position> getRoute(Position start, Position end, string mode)
         {
-            string url = getUrl("v2/directions/foot-walking") + "&start=" + start.getLatitudeString() + "," + start.getLongitudeString() + "&end=" + end.getLatitudeString() + "," + end.getLongitudeString();
+            string url = getUrl("v2/directions/" + mode) + "&start=" + start.getLatitudeString() + "," + start.getLongitudeString() + "&end=" + end.getLatitudeString() + "," + end.getLongitudeString();
             
             Console.WriteLine(url);
             
@@ -36,6 +37,11 @@ namespace OSMRoutingClient
             }
 
             return positions;
+        }
+        
+        public List<Position> getRoute(Position start, Position end)
+        {
+            return getRoute(start, end, "foot-walking");
         }
 
         public Position getPosition(string query)
