@@ -1,8 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -52,6 +53,69 @@ namespace OSMRoutingClient
             string json = client.GetStringAsync(url).Result;
             dynamic o = JsonConvert.DeserializeObject(json);
             return new Position(o.features[0].geometry.coordinates[0].ToObject<double>(), o.features[0].geometry.coordinates[1].ToObject<double>());
+        }
+    }
+
+    [DataContract]
+    public class Position
+    {
+        [DataMember]
+        double latitude;
+        [DataMember]
+        double longitude;
+
+        public Position(double latitude, double longitude)
+        {
+            this.latitude = latitude;
+            this.longitude = longitude;
+        }
+
+        public double getLatitude()
+        {
+            return this.latitude;
+        }
+
+        public double getLongitude()
+        {
+            return this.longitude;
+        }
+
+        public string getLatitudeString()
+        {
+            return this.latitude.ToString().Replace(",", ".");
+        }
+
+        public string getLongitudeString()
+        {
+            return this.longitude.ToString().Replace(",", ".");
+        }
+
+        public double distance(Position position)
+        {
+            double R = 6371e3; // metres
+            double φ1 = this.latitude * Math.PI / 180; // φ, λ in radians
+            double φ2 = position.getLatitude() * Math.PI / 180;
+            double Δφ = (position.getLatitude() - this.latitude) * Math.PI / 180;
+            double Δλ = (position.getLongitude() - this.longitude) * Math.PI / 180;
+
+            double a = Math.Sin(Δφ / 2) * Math.Sin(Δφ / 2) +
+                    Math.Cos(φ1) * Math.Cos(φ2) *
+                    Math.Sin(Δλ / 2) * Math.Sin(Δλ / 2);
+            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+
+            double d = R * c; // in metres
+            return d;
+        }
+
+        public static double distance(List<Position> positions)
+        {
+            double d = 0;
+            for (int i = 0; i < positions.Count - 1; i++)
+            {
+                d += positions[i].distance(positions[i + 1]);
+            }
+
+            return d;
         }
     }
 }

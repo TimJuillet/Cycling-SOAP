@@ -22,15 +22,6 @@ namespace RoutingServer
 
     }
 
-    [DataContract]
-    public class Position
-    {
-        [DataMember]
-        public double latitude;
-        [DataMember]
-        public double longitude;
-    }
-
 
 
     // Utilisez un contrat de données comme indiqué dans l'exemple ci-après pour ajouter les types composites aux opérations de service.

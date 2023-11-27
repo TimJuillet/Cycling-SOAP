@@ -12,6 +12,13 @@ namespace JCDecauxClient
     public class JCDecauxClient
     {
 
+        static void Main(string[] args)
+        {
+            // Display the number of command line arguments.
+            Console.WriteLine(args.Length);
+        }
+
+
         static async Task<List<Contract>> GetContracts()
         {
             HttpClient httpClient = new HttpClient();
