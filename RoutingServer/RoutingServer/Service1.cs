@@ -30,6 +30,14 @@ namespace RoutingServer
             return null;
         }
 
+        public Boolean isWalkingFaster(List<Position> WalkingtrajetFromBaseToFirstStation, List<Position> trajetFromFirstStationToLastStation, List<Position> WalkingtrajetFromLastStationToEnd, List<Position> WalkingtrajectFromBaseToEnd)
+        {
+            double timeWalking = (Position.distance(WalkingtrajetFromBaseToFirstStation) + Position.distance(WalkingtrajetFromLastStationToEnd)) / walkSpeed;
+            double timeBiking = Position.distance(trajetFromFirstStationToLastStation) / bikeSpeed;
+            double timeWalkingFromBaseToEnd = Position.distance(WalkingtrajectFromBaseToEnd) / walkSpeed;
+            return timeWalkingFromBaseToEnd < timeWalking + timeBiking;
+        }
+
 
         public List<Position> GetTrajet(Position start, Position end, String mode)
         {
