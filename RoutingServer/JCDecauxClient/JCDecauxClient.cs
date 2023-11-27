@@ -9,7 +9,7 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace JCDecauxClient
 {
-    internal class JCDecauxClient
+    public class JCDecauxClient
     {
         static void Main(string[] args)
         {
@@ -61,7 +61,7 @@ namespace JCDecauxClient
             return jsonString;
         }
 
-        static async Task<List<Station>> GetAllStationsFromAllContracts()
+        public static async Task<List<Station>> GetAllStationsFromAllContracts()
         {
 
             List<Contract> contracts = await GetContracts();
@@ -88,11 +88,6 @@ public class Contract
 public class Station
 {
     public string name { get; set; }
-    public Position position { get; set; }
+    public OSMRoutingClient.Position position { get; set; }
 }
 
-public class Position
-{
-    public double lat { get; set; }
-    public double lng { get; set; }
-}

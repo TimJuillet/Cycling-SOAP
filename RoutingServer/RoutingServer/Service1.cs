@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-
+using System.Threading.Tasks;
 
 namespace RoutingServer
 {
@@ -13,10 +13,22 @@ namespace RoutingServer
     public class Service1 : IService1 { 
 
         public static OSMRoutingClient.OSMRoutingClient client = new OSMRoutingClient.OSMRoutingClient();
+        public static Task<List<Station>> allStations = JCDecauxClient.JCDecauxClient.GetAllStationsFromAllContracts();
 
-        public Route GetTrajet(String start, String end)
+        public List<Position> GetTrajet(String start, String end)
         {
-            return client.getRoute(new Position(43.61570, 7.07136), new Position(43.58998, 7.12431));
+            //TODO
+            return null;
+        }
+
+        public Station getClosestStationFromPlace(String place)
+        {
+            // get the position of the place
+            // compare the position of the place with the position of all the stations
+            // return the closest station
+
+
+            return null;
         }
 
 
