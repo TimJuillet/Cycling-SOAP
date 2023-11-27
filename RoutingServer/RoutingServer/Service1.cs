@@ -17,7 +17,7 @@ namespace RoutingServer
         private static double bikeSpeed = 15;
         private static double walkSpeed = 5;
 
-        List<Position> GetBestTrajet(String start, String end)
+        List<List<Position>> GetBestTrajet(String start, String end)
         {
             Station closestToStart = getClosestStationFromPlace(start);
             Station closestToEnd = getClosestStationFromPlace(end);
@@ -27,7 +27,15 @@ namespace RoutingServer
             List<Position> trajetFromFirstStationToLastStation = GetTrajet(closestToStart.position, closestToEnd.position, "cycling-regular");
 
             List<Position> WalkingtrajectFromBaseToEnd = GetTrajet(client.getPosition(start), client.getPosition(end), "foot-walking");
-            return null;
+
+            if (isWalkingFaster(WalkingtrajetFromBaseToFirstStation, trajetFromFirstStationToLastStation, WalkingtrajetFromLastStationToEnd, WalkingtrajectFromBaseToEnd))
+            {
+                return new List<List<Position>> { WalkingtrajectFromBaseToEnd };
+            }
+            else
+            {
+                return new List<List<Position>> { WalkingtrajetFromBaseToFirstStation, trajetFromFirstStationToLastStation, WalkingtrajetFromLastStationToEnd };
+            }
         }
 
         public Boolean isWalkingFaster(List<Position> WalkingtrajetFromBaseToFirstStation, List<Position> trajetFromFirstStationToLastStation, List<Position> WalkingtrajetFromLastStationToEnd, List<Position> WalkingtrajectFromBaseToEnd)
