@@ -17,7 +17,7 @@ namespace RoutingServer
         private static double bikeSpeed = 15;
         private static double walkSpeed = 5;
 
-        List<List<Position>> GetBestTrajet(String start, String end)
+        List<List<Position>> IService1.GetBestTrajet(String start, String end)
         {
             Station closestToStart = getClosestStationFromPlace(start);
             Station closestToEnd = getClosestStationFromPlace(end);
@@ -89,11 +89,6 @@ namespace RoutingServer
                 composite.StringValue += "Suffix";
             }
             return composite;
-        }
-
-        List<Position> IService1.GetBestTrajet(string start, string end)
-        {
-            throw new NotImplementedException();
         }
     }
 }
