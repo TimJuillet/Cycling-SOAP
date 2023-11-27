@@ -14,11 +14,26 @@ namespace RoutingServer
 
         public static OSMRoutingClient.OSMRoutingClient client = new OSMRoutingClient.OSMRoutingClient();
         public static Task<List<Station>> allStations = JCDecauxClient.JCDecauxClient.GetAllStationsFromAllContracts();
+        private static double bikeSpeed = 15;
+        private static double walkSpeed = 5;
 
-        public List<Position> GetTrajet(String start, String end, String mode)
+        List<Position> GetBestTrajet(String start, String end)
         {
-            List<Position> positions = new List<Position>();
-            positions = client.getRoute(client.getPosition(start), client.getPosition(end), mode);
+            Station closestToStart = getClosestStationFromPlace(start);
+            Station closestToEnd = getClosestStationFromPlace(end);
+
+            List<Position> WalkingtrajetFromBaseToFirstStation = GetTrajet(client.getPosition(start), closestToStart.position, "foot-walking");
+            List<Position> WalkingtrajetFromLastStationToEnd = GetTrajet(closestToEnd.position, client.getPosition(end), "foot-walking");
+            List<Position> trajetFromFirstStationToLastStation = GetTrajet(closestToStart.position, closestToEnd.position, "cycling-regular");
+
+            List<Position> WalkingtrajectFromBaseToEnd = GetTrajet(client.getPosition(start), client.getPosition(end), "foot-walking");
+            return null;
+        }
+
+
+        public List<Position> GetTrajet(Position start, Position end, String mode)
+        {
+            List<Position> positions = client.getRoute(start, end, mode);
             return positions;
         }
 
@@ -44,6 +59,7 @@ namespace RoutingServer
             return closestStation;
         }
 
+      
 
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
@@ -57,6 +73,11 @@ namespace RoutingServer
                 composite.StringValue += "Suffix";
             }
             return composite;
+        }
+
+        List<Position> IService1.GetBestTrajet(string start, string end)
+        {
+            throw new NotImplementedException();
         }
     }
 }
