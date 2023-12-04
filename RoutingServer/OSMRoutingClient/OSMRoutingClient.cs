@@ -18,6 +18,12 @@ namespace OSMRoutingClient
         private string base_url = "https://api.openrouteservice.org/";
         static readonly HttpClient client = new HttpClient();
 
+        static void Main(string[] args)
+        {
+            // Display the number of command line arguments.
+            Console.WriteLine(args.Length);
+        }
+
         public string getUrl(string endpoint)
         {
             return base_url + endpoint + "?api_key=" + api_key;

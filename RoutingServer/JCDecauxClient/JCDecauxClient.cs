@@ -62,15 +62,15 @@ namespace JCDecauxClient
             return jsonString;
         }
 
-        public static async Task<List<Station>> GetAllStationsFromAllContracts()
+        public static List<Station> GetAllStationsFromAllContracts()
         {
 
-            List<Contract> contracts = await GetContracts();
+            List<Contract> contracts = GetContracts().Result;
             List<Station> allStations = new List<Station>();
 
             for (int i = 0; i < contracts.Count; i++)
             {
-                List<Station> stations = await GetStations(contracts[i]);
+                List<Station> stations = GetStations(contracts[i]).Result;
                 allStations.AddRange(stations);
             }
 

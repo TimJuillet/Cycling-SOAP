@@ -1,4 +1,5 @@
-﻿using OSMRoutingClient;
+﻿using JCDecauxClient;
+using OSMRoutingClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,14 @@ namespace RoutingServer
     public class Service1 : IService1 { 
 
         public static OSMRoutingClient.OSMRoutingClient client = new OSMRoutingClient.OSMRoutingClient();
-        public static Task<List<Station>> allStations = JCDecauxClient.JCDecauxClient.GetAllStationsFromAllContracts();
+        public static List<Station> allStations;
         private static double bikeSpeed = 15;
         private static double walkSpeed = 5;
+
+        public Service1() { 
+            allStations = JCDecauxClient.JCDecauxClient.GetAllStationsFromAllContracts();
+        }
+
 
         public CompositeType GetDataUsingDataContract(CompositeType composite)
         {
@@ -75,7 +81,7 @@ namespace RoutingServer
             Station closestStation = null;
             Position placePosition = client.getPosition(place);
 
-            foreach(Station station in allStations.Result)
+            foreach(Station station in allStations)
             {
                 double distance = station.position.distance(placePosition);
                 if (distance < minDistance)

@@ -9,6 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JCDecauxClient", "JCDecauxC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSMRoutingClient", "OSMRoutingClient\OSMRoutingClient.csproj", "{324C6F70-EF65-4526-B5EC-469CF484C601}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientTest", "ClientTest\ClientTest.csproj", "{F82E4B1C-EF2E-46AE-9DC6-D92C2BC8C14D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CCFA7334-62DA-445E-B896-0139A4459AE8} = {CCFA7334-62DA-445E-B896-0139A4459AE8}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +32,10 @@ Global
 		{324C6F70-EF65-4526-B5EC-469CF484C601}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{324C6F70-EF65-4526-B5EC-469CF484C601}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{324C6F70-EF65-4526-B5EC-469CF484C601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F82E4B1C-EF2E-46AE-9DC6-D92C2BC8C14D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F82E4B1C-EF2E-46AE-9DC6-D92C2BC8C14D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F82E4B1C-EF2E-46AE-9DC6-D92C2BC8C14D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F82E4B1C-EF2E-46AE-9DC6-D92C2BC8C14D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
