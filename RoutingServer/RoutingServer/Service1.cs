@@ -11,49 +11,52 @@ using System.Threading.Tasks;
 namespace RoutingServer
 {
     // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service1" à la fois dans le code et le fichier de configuration.
-    public class Service1 : IService1 { 
+    public class Service1 : IService1 {
 
-        public static OSMRoutingClient.OSMRoutingClient client = new OSMRoutingClient.OSMRoutingClient();
+        public static OSMRoutingClient.OSMRoutingClient client;
         public static List<Station> allStations;
         private static double bikeSpeed = 15;
         private static double walkSpeed = 5;
 
-        public Service1() { 
-            allStations = JCDecauxClient.JCDecauxClient.GetAllStationsFromAllContracts();
+        public Service1()
+        {
+            InitializeAsync().Wait(); // Wait synchronously for initialization
         }
 
-
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        private async Task InitializeAsync()
         {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
+            client = new OSMRoutingClient.OSMRoutingClient();
+            JCDecauxClient.JCDecauxClient jcDecauxClient = new JCDecauxClient.JCDecauxClient();
+            allStations = await jcDecauxClient.GetAllStationsFromAllContracts();
         }
 
         List<List<Position>> IService1.GetBestTrajet(String start, String end)
         {
-            Station closestToStart = getClosestStationFromPlace(start);
-            Station closestToEnd = getClosestStationFromPlace(end);
-
-            List<Position> WalkingtrajetFromBaseToFirstStation = GetTrajet(client.getPosition(start), closestToStart.position, "foot-walking");
-            List<Position> WalkingtrajetFromLastStationToEnd = GetTrajet(closestToEnd.position, client.getPosition(end), "foot-walking");
-            List<Position> trajetFromFirstStationToLastStation = GetTrajet(closestToStart.position, closestToEnd.position, "cycling-regular");
-
-            List<Position> WalkingtrajectFromBaseToEnd = GetTrajet(client.getPosition(start), client.getPosition(end), "foot-walking");
-
-            if (isWalkingFaster(WalkingtrajetFromBaseToFirstStation, trajetFromFirstStationToLastStation, WalkingtrajetFromLastStationToEnd, WalkingtrajectFromBaseToEnd))
+        
+            try
             {
-                return new List<List<Position>> { WalkingtrajectFromBaseToEnd };
+
+                Station closestToStart =  getClosestStationFromPlace(start);
+                Station closestToEnd =  getClosestStationFromPlace(end);
+
+                List<Position> WalkingtrajetFromBaseToFirstStation =  GetTrajet(client.getPosition(start).Result, closestToStart.position, "foot-walking");
+                List<Position> WalkingtrajetFromLastStationToEnd =  GetTrajet(closestToEnd.position, client.getPosition(end).Result, "foot-walking");
+                List<Position> trajetFromFirstStationToLastStation =  GetTrajet(closestToStart.position, closestToEnd.position, "cycling-regular");
+                List<Position> WalkingtrajectFromBaseToEnd =  GetTrajet(client.getPosition(start).Result, client.getPosition(end).Result, "foot-walking");
+
+                if (isWalkingFaster(WalkingtrajetFromBaseToFirstStation, trajetFromFirstStationToLastStation, WalkingtrajetFromLastStationToEnd, WalkingtrajectFromBaseToEnd))
+                {
+                    return new List<List<Position>> { WalkingtrajectFromBaseToEnd };
+                }
+                else
+                {
+                    return new List<List<Position>> { WalkingtrajetFromBaseToFirstStation, trajetFromFirstStationToLastStation, WalkingtrajetFromLastStationToEnd };
+                }
             }
-            else
+            catch (Exception e)
             {
-                return new List<List<Position>> { WalkingtrajetFromBaseToFirstStation, trajetFromFirstStationToLastStation, WalkingtrajetFromLastStationToEnd };
+                Console.WriteLine(e.StackTrace.ToString());
+                return new List<List<Position>> { };
             }
         }
 
@@ -68,7 +71,7 @@ namespace RoutingServer
 
         public List<Position> GetTrajet(Position start, Position end, String mode)
         {
-            List<Position> positions = client.getRoute(start, end, mode);
+            List<Position> positions = client.getRoute(start, end, mode).Result;
             return positions;
         }
 
@@ -79,7 +82,7 @@ namespace RoutingServer
             // return the closest station
             double minDistance = 0;
             Station closestStation = null;
-            Position placePosition = client.getPosition(place);
+            Position placePosition = client.getPosition(place).Result;
 
             foreach(Station station in allStations)
             {

@@ -18,10 +18,17 @@ namespace OSMRoutingClient
         private string base_url = "https://api.openrouteservice.org/";
         static readonly HttpClient client = new HttpClient();
 
+        public OSMRoutingClient()
+        {
+        }
+
         static void Main(string[] args)
         {
             // Display the number of command line arguments.
-            Console.WriteLine(args.Length);
+            //Console.WriteLine(args.Length);
+            // do a test
+            //OSMRoutingClient client = new OSMRoutingClient();
+            //Console.WriteLine(client.getPosition("Lyon").Result.getLatitude());
         }
 
         public string getUrl(string endpoint)
@@ -30,13 +37,13 @@ namespace OSMRoutingClient
         }
         
         
-        public List<Position> getRoute(Position start, Position end, string mode)
+        async public Task<List<Position>> getRoute(Position start, Position end, string mode)
         {
             string url = getUrl("v2/directions/" + mode) + "&start=" + start.getLatitudeString() + "," + start.getLongitudeString() + "&end=" + end.getLatitudeString() + "," + end.getLongitudeString();
             
             Console.WriteLine(url);
             
-            string json = client.GetStringAsync(url).Result;
+            string json = await client.GetStringAsync(url);
             dynamic o = JsonConvert.DeserializeObject(json);
             List<Position> positions = new List<Position>();
             foreach (var step in o.features[0].geometry.coordinates)
@@ -47,16 +54,16 @@ namespace OSMRoutingClient
             return positions;
         }
         
-        public List<Position> getRoute(Position start, Position end)
+        async public Task<List<Position>> getRoute(Position start, Position end)
         {
-            return getRoute(start, end, "foot-walking");
+            return await getRoute(start, end, "foot-walking");
         }
 
-        public Position getPosition(string query)
+        async public Task<Position> getPosition(string query)
         {
             string url = getUrl("geocode/search") + "&text=" + query;
             Console.WriteLine(url);
-            string json = client.GetStringAsync(url).Result;
+            string json = await client.GetStringAsync(url);
             dynamic o = JsonConvert.DeserializeObject(json);
             return new Position(o.features[0].geometry.coordinates[0].ToObject<double>(), o.features[0].geometry.coordinates[1].ToObject<double>());
         }
@@ -70,6 +77,7 @@ namespace OSMRoutingClient
         [DataMember]
         double longitude;
 
+        [JsonConstructor]
         public Position(double latitude, double longitude)
         {
             this.latitude = latitude;

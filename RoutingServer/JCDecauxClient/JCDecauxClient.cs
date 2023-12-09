@@ -15,11 +15,18 @@ namespace JCDecauxClient
         static void Main(string[] args)
         {
             // Display the number of command line arguments.
-            Console.WriteLine(args.Length);
+            //Console.WriteLine(args.Length);
+
+            // Do a test
+            //JCDecauxClient client = new JCDecauxClient();
+            //var contracts = client.GetAllStationsFromAllContracts().Result;
+            //Console.WriteLine(contracts);
         }
 
+        public JCDecauxClient() { }
 
-        static async Task<List<Contract>> GetContracts()
+
+        public async Task<List<Contract>> GetContracts()
         {
             HttpClient httpClient = new HttpClient();
             HttpResponseMessage response = await httpClient.GetAsync("https://api.jcdecaux.com/vls/v3/contracts?apiKey=882e4ad9152fe8084440b76ad14cb9f55cc3d483");
@@ -40,7 +47,7 @@ namespace JCDecauxClient
             return jsonString;
         }
 
-        static async Task<List<Station>> GetStations(Contract contract)
+        public async Task<List<Station>> GetStations(Contract contract)
         {
             HttpClient httpClient = new HttpClient();
             HttpResponseMessage response = await httpClient.GetAsync($"https://api.jcdecaux.com/vls/v3/stations?contract={contract.name}&apiKey=882e4ad9152fe8084440b76ad14cb9f55cc3d483");
@@ -62,15 +69,15 @@ namespace JCDecauxClient
             return jsonString;
         }
 
-        public static List<Station> GetAllStationsFromAllContracts()
+        public async Task<List<Station>> GetAllStationsFromAllContracts()
         {
 
-            List<Contract> contracts = GetContracts().Result;
+            List<Contract> contracts = await GetContracts();
             List<Station> allStations = new List<Station>();
 
             for (int i = 0; i < contracts.Count; i++)
             {
-                List<Station> stations = GetStations(contracts[i]).Result;
+                List<Station> stations = await GetStations(contracts[i]);
                 allStations.AddRange(stations);
             }
 
