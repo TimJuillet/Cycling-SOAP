@@ -1,10 +1,12 @@
-[09/12/2023 16:09:53] - print all stations nb 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
-[09/12/2023 16:09:53] - print all stations nb 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
-[09/12/2023 16:09:53] - Error in GetBestTrajet method: System.NullReferenceException: La référence d'objet n'est pas définie à une instance d'un objet.
-   à RoutingServer.Service1.RoutingServer.IService1.GetBestTrajet(String start, String end) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 50
-[09/12/2023 16:12:58] - print all stations nb 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
-[09/12/2023 16:12:58] - print all stations nb 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
-[09/12/2023 16:13:00] - GetTraject : there are 8173: System.Exception: nb of positions
-[09/12/2023 16:13:02] - GetTraject : there are 13105: System.Exception: nb of positions
-[09/12/2023 16:13:03] - GetTraject : there are 1: System.Exception: nb of positions
-[09/12/2023 16:13:04] - GetTraject : there are 11753: System.Exception: nb of positions
+[09/12/2023 16:31:56] - print all stations nb 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
+[09/12/2023 16:31:56] - print all stations nb 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
+[09/12/2023 16:31:58] - GetTraject : there are 8173: System.Exception: nb of positions
+[09/12/2023 16:32:03] - GetTraject : there are 13105: System.Exception: nb of positions
+[09/12/2023 16:32:03] - GetTraject : there are 1: System.Exception: nb of positions
+[09/12/2023 16:32:08] - GetTraject : there are 11753: System.Exception: nb of positions
+[09/12/2023 16:36:52] - print all stations nb 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
+[09/12/2023 16:36:52] - print all stations nb 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
+[09/12/2023 16:36:55] - GetTraject : there are 8173: System.Exception: nb of positions
+[09/12/2023 16:36:57] - GetTraject : there are 13105: System.Exception: nb of positions
+[09/12/2023 16:36:57] - GetTraject : there are 1: System.Exception: nb of positions
+[09/12/2023 16:37:00] - GetTraject : there are 11753: System.Exception: nb of positions

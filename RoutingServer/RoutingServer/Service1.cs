@@ -45,12 +45,13 @@ namespace RoutingServer
                 Station closestToStart = getClosestStationFromPlace(start);
                 Station closestToEnd = getClosestStationFromPlace(end);
 
-                Position p = client.getPosition(start).Result;
+                Position startPostion = client.getPosition(start).Result;
+                Position endPosition = client.getPosition(end).Result;
 
-                List<Position> WalkingtrajetFromBaseToFirstStation = GetTrajet(client.getPosition(start).Result, closestToStart.position, "foot-walking");
-                List<Position> WalkingtrajetFromLastStationToEnd = GetTrajet(closestToEnd.position, client.getPosition(end).Result, "foot-walking");
+                List<Position> WalkingtrajetFromBaseToFirstStation = GetTrajet(startPostion, closestToStart.position, "foot-walking");
+                List<Position> WalkingtrajetFromLastStationToEnd = GetTrajet(closestToEnd.position, endPosition, "foot-walking");
                 List<Position> trajetFromFirstStationToLastStation = GetTrajet(closestToStart.position, closestToEnd.position, "cycling-regular");
-                List<Position> WalkingtrajectFromBaseToEnd = GetTrajet(client.getPosition(start).Result, client.getPosition(end).Result, "foot-walking");
+                List<Position> WalkingtrajectFromBaseToEnd = GetTrajet(startPostion, endPosition, "foot-walking");
 
                 if (isWalkingFaster(WalkingtrajetFromBaseToFirstStation, trajetFromFirstStationToLastStation, WalkingtrajetFromLastStationToEnd, WalkingtrajectFromBaseToEnd))
                 {
@@ -80,7 +81,6 @@ namespace RoutingServer
         public List<Position> GetTrajet(Position start, Position end, String mode)
         {
             List<Position> positions = client.getRoute(start, end, mode).Result;
-            LogError($"GetTraject : there are {positions.Count}", new Exception("nb of positions"));
             return positions;
         }
 
@@ -92,9 +92,6 @@ namespace RoutingServer
             Station closestStation = null;
             Position placePosition = client.getPosition(place).Result;
             double minDistance = allStations[0].position.distance(placePosition);
-
-            LogError($"print all stations nb {allStations.Count}", new Exception());
-
 
             foreach (Station station in allStations)
             {
