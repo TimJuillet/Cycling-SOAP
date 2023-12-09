@@ -18,9 +18,9 @@ namespace JCDecauxClient
             //Console.WriteLine(args.Length);
 
             // Do a test
-            //JCDecauxClient client = new JCDecauxClient();
-            //var contracts = client.GetAllStationsFromAllContracts().Result;
-            //Console.WriteLine(contracts);
+            JCDecauxClient client = new JCDecauxClient();
+            var contracts = client.GetAllStationsFromAllContracts().Result;
+            Console.WriteLine(contracts);
         }
 
         public JCDecauxClient() { }
@@ -41,7 +41,7 @@ namespace JCDecauxClient
 
             for (int i = 0; i < jsonString.Count; i++)
             {
-                Console.WriteLine(jsonString[i].name);
+                //Console.WriteLine(jsonString[i].name);
             }
 
             return jsonString;
@@ -63,7 +63,7 @@ namespace JCDecauxClient
 
             for (int i = 0; i < jsonString.Count; i++)
             {
-                Console.WriteLine(jsonString[i].name);
+                //Console.WriteLine(jsonString[i].name);
             }
 
             return jsonString;
@@ -71,8 +71,10 @@ namespace JCDecauxClient
 
         public async Task<List<Station>> GetAllStationsFromAllContracts()
         {
-
+            Console.WriteLine("CA CASSE");  
             List<Contract> contracts = await GetContracts();
+            Console.WriteLine("CA CASSE 2");
+
             List<Station> allStations = new List<Station>();
 
             for (int i = 0; i < contracts.Count; i++)
@@ -80,6 +82,8 @@ namespace JCDecauxClient
                 List<Station> stations = await GetStations(contracts[i]);
                 allStations.AddRange(stations);
             }
+            Console.WriteLine("CA CASSE 3");
+
 
             return allStations;
 

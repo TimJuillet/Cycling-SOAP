@@ -15,7 +15,7 @@ namespace ClientTest
             try
             {
                 Service1Client service1Client = new Service1Client();
-                Console.WriteLine(service1Client.GetBestTrajet("Lyon", "Marseille"));
+                Console.WriteLine(service1Client.GetBestTrajet("Lyon", "Toulouse").Length);
             }
             catch (FaultException<ExceptionDetail> ex)
             {

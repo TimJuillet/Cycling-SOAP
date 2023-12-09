@@ -2,6 +2,7 @@
 using OSMRoutingClient;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -27,22 +28,29 @@ namespace RoutingServer
         {
             client = new OSMRoutingClient.OSMRoutingClient();
             JCDecauxClient.JCDecauxClient jcDecauxClient = new JCDecauxClient.JCDecauxClient();
-            allStations = await jcDecauxClient.GetAllStationsFromAllContracts();
+            try
+            {
+                allStations = await jcDecauxClient.GetAllStationsFromAllContracts();
+            }
+            catch (Exception ex)
+            {
+                LogError("Error during initialization", ex);
+            }
         }
 
         List<List<Position>> IService1.GetBestTrajet(String start, String end)
         {
-        
             try
             {
+                Station closestToStart = getClosestStationFromPlace(start);
+                Station closestToEnd = getClosestStationFromPlace(end);
 
-                Station closestToStart =  getClosestStationFromPlace(start);
-                Station closestToEnd =  getClosestStationFromPlace(end);
+                Position p = client.getPosition(start).Result;
 
-                List<Position> WalkingtrajetFromBaseToFirstStation =  GetTrajet(client.getPosition(start).Result, closestToStart.position, "foot-walking");
-                List<Position> WalkingtrajetFromLastStationToEnd =  GetTrajet(closestToEnd.position, client.getPosition(end).Result, "foot-walking");
-                List<Position> trajetFromFirstStationToLastStation =  GetTrajet(closestToStart.position, closestToEnd.position, "cycling-regular");
-                List<Position> WalkingtrajectFromBaseToEnd =  GetTrajet(client.getPosition(start).Result, client.getPosition(end).Result, "foot-walking");
+                List<Position> WalkingtrajetFromBaseToFirstStation = GetTrajet(client.getPosition(start).Result, closestToStart.position, "foot-walking");
+                List<Position> WalkingtrajetFromLastStationToEnd = GetTrajet(closestToEnd.position, client.getPosition(end).Result, "foot-walking");
+                List<Position> trajetFromFirstStationToLastStation = GetTrajet(closestToStart.position, closestToEnd.position, "cycling-regular");
+                List<Position> WalkingtrajectFromBaseToEnd = GetTrajet(client.getPosition(start).Result, client.getPosition(end).Result, "foot-walking");
 
                 if (isWalkingFaster(WalkingtrajetFromBaseToFirstStation, trajetFromFirstStationToLastStation, WalkingtrajetFromLastStationToEnd, WalkingtrajectFromBaseToEnd))
                 {
@@ -53,9 +61,9 @@ namespace RoutingServer
                     return new List<List<Position>> { WalkingtrajetFromBaseToFirstStation, trajetFromFirstStationToLastStation, WalkingtrajetFromLastStationToEnd };
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e.StackTrace.ToString());
+                LogError("Error in GetBestTrajet method", ex);
                 return new List<List<Position>> { };
             }
         }
@@ -72,6 +80,7 @@ namespace RoutingServer
         public List<Position> GetTrajet(Position start, Position end, String mode)
         {
             List<Position> positions = client.getRoute(start, end, mode).Result;
+            LogError($"GetTraject : there are {positions.Count}", new Exception("nb of positions"));
             return positions;
         }
 
@@ -80,11 +89,14 @@ namespace RoutingServer
             // get the position of the place
             // compare the position of the place with the position of all the stations
             // return the closest station
-            double minDistance = 0;
             Station closestStation = null;
             Position placePosition = client.getPosition(place).Result;
+            double minDistance = allStations[0].position.distance(placePosition);
 
-            foreach(Station station in allStations)
+            LogError($"print all stations nb {allStations.Count}", new Exception());
+
+
+            foreach (Station station in allStations)
             {
                 double distance = station.position.distance(placePosition);
                 if (distance < minDistance)
@@ -95,6 +107,22 @@ namespace RoutingServer
             }
             
             return closestStation;
+        }
+
+        public static void LogError(string message, Exception ex)
+        {
+            // Log the error to a file
+            try
+            {
+                using (StreamWriter writer = new StreamWriter("C:\\Users\\astag\\source\\repos\\ProjectBiking\\RoutingServer\\ClientTest\\Connected Services\\ServiceReference1\\zizicaca.txt", true))
+                {
+                    writer.WriteLine($"[{DateTime.Now}] - {message}: {ex.ToString()}");
+                }
+            }
+            catch (Exception logEx)
+            {
+                Console.WriteLine($"Failed to log error: {logEx.Message}");
+            }
         }
     }
 }

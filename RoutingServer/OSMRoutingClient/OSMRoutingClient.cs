@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Device.Location;
 using System.Dynamic;
 using System.Linq;
 using System.Net.Http;
@@ -65,6 +66,7 @@ namespace OSMRoutingClient
             Console.WriteLine(url);
             string json = await client.GetStringAsync(url);
             dynamic o = JsonConvert.DeserializeObject(json);
+           
             return new Position(o.features[0].geometry.coordinates[0].ToObject<double>(), o.features[0].geometry.coordinates[1].ToObject<double>());
         }
     }
@@ -72,27 +74,17 @@ namespace OSMRoutingClient
     [DataContract]
     public class Position
     {
-        [DataMember]
-        double latitude;
-        [DataMember]
-        double longitude;
+        [DataMember(Name = "latitude")]
+        public double latitude { get; set; }
+        [DataMember(Name = "longitude")]
+        public double longitude { get; set; }
 
-        [JsonConstructor]
         public Position(double latitude, double longitude)
         {
             this.latitude = latitude;
             this.longitude = longitude;
         }
 
-        public double getLatitude()
-        {
-            return this.latitude;
-        }
-
-        public double getLongitude()
-        {
-            return this.longitude;
-        }
 
         public string getLatitudeString()
         {
@@ -106,19 +98,9 @@ namespace OSMRoutingClient
 
         public double distance(Position position)
         {
-            double R = 6371e3; // metres
-            double φ1 = this.latitude * Math.PI / 180; // φ, λ in radians
-            double φ2 = position.getLatitude() * Math.PI / 180;
-            double Δφ = (position.getLatitude() - this.latitude) * Math.PI / 180;
-            double Δλ = (position.getLongitude() - this.longitude) * Math.PI / 180;
-
-            double a = Math.Sin(Δφ / 2) * Math.Sin(Δφ / 2) +
-                    Math.Cos(φ1) * Math.Cos(φ2) *
-                    Math.Sin(Δλ / 2) * Math.Sin(Δλ / 2);
-            double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
-
-            double d = R * c; // in metres
-            return d;
+            var tmp1 = new GeoCoordinate(this.latitude, this.longitude);
+            var tmp2 = new GeoCoordinate(position.latitude, position.longitude);
+            return tmp1.GetDistanceTo(tmp2);
         }
 
         public static double distance(List<Position> positions)
