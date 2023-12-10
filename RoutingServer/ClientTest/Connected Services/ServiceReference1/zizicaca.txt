@@ -30,3 +30,14 @@ Exception rethrown at [0]:
 [10/12/2023 15:01:50] - Stations deserialized : nb station 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
 [10/12/2023 15:05:37] - call proxy: System.Exception: Une exception de type 'System.Exception' a été levée.
 [10/12/2023 15:05:40] - Stations deserialized : nb station 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 16:09:34] - call proxy: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 16:09:59] - Stations deserialized : nb station 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 16:11:58] - call proxy: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 16:13:00] - call proxy: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 16:14:43] - call proxy: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 16:30:12] - call proxy: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 16:33:44] - call proxy: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 16:34:45] - call proxy: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 16:35:29] - call proxy: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 16:38:02] - call proxy: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 16:38:29] - call proxy: System.Exception: Une exception de type 'System.Exception' a été levée.

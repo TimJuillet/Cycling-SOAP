@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OpenRoute {
+    /*
     private String api_key;
     private String base_url = "https://api.openrouteservice.org/";
 
@@ -106,4 +107,6 @@ public class OpenRoute {
         OpenRoute or = new OpenRoute();
         or.getRoute(new MapPoint(43.61524, 7.07188), new MapPoint(43.58807, 7.05226));
     }
+    */
+
 }
