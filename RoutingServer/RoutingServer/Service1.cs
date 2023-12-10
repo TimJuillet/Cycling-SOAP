@@ -16,22 +16,30 @@ namespace RoutingServer
 
         public static OSMRoutingClient.OSMRoutingClient client;
         public static List<Station> allStations;
-        private static double bikeSpeed = 50;
+        private static double bikeSpeed = 15;
         private static double walkSpeed = 5;
+        BasicHttpBinding httpBindingBase;
 
         public Service1()
         {
             try
             {
+                httpBindingBase = new BasicHttpBinding();
+                httpBindingBase .MaxReceivedMessageSize = 2147483647;
                 client = new OSMRoutingClient.OSMRoutingClient();
-                JCDStationsProxyClient jCDStationsProxyClient = new JCDStationsProxyClient();
+                Service1Client jCDStationsProxyClient = new Service1Client(httpBindingBase, new EndpointAddress("http://localhost:8733/Design_Time_Addresses/ProxyCacheSwagg/Service1/"));
+                
                 // LogError("call proxy", new Exception());
-                allStations = jCDStationsProxyClient.GetallStations().ToList();
+                allStations = jCDStationsProxyClient.GetStations().ToList();
             } catch(Exception e) {
                 LogError("Error in init ", e);
             }
         }
 
+        OSMRoutingClient.Position convertPosition(RoutingServer.ServiceReference1.StationPosition position)
+        {
+            return new OSMRoutingClient.Position((double) position.lat, (double) position.lng);
+        }
 
         List<List<Position>> IService1.GetBestTrajet(String start, String end)
         {
@@ -43,9 +51,9 @@ namespace RoutingServer
                 Position startPostion = client.getPosition(start).Result;
                 Position endPosition = client.getPosition(end).Result;
 
-                List<Position> WalkingtrajetFromBaseToFirstStation = GetTrajet(startPostion, closestToStart.position, "foot-walking");
-                List<Position> WalkingtrajetFromLastStationToEnd = GetTrajet(closestToEnd.position, endPosition, "foot-walking");
-                List<Position> trajetFromFirstStationToLastStation = GetTrajet(closestToStart.position, closestToEnd.position, "cycling-road");
+                List<Position> WalkingtrajetFromBaseToFirstStation = GetTrajet(startPostion, convertPosition(closestToStart.position), "foot-walking");
+                List<Position> WalkingtrajetFromLastStationToEnd = GetTrajet(convertPosition(closestToEnd.position), endPosition, "foot-walking");
+                List<Position> trajetFromFirstStationToLastStation = GetTrajet(convertPosition(closestToStart.position), convertPosition(closestToEnd.position), "cycling-road");
 
                 List<Position> WalkingtrajectFromBaseToEnd = GetTrajet(startPostion, endPosition, "foot-walking");
 
@@ -97,7 +105,16 @@ namespace RoutingServer
             // compare the position of the place with the position of all the stations
             // return the closest station
             Position placePosition = client.getPosition(place).Result;
-            Station closestStation = allStations.OrderBy(station => station.position.distance(placePosition)).First();
+            
+            //remove stations that don't have bikes
+            allStations.RemoveAll(station => station.available_bikes == 0);
+
+            //get the 3 closest stations
+            List<Station> closestStations = allStations.OrderBy(station => convertPosition(station.position).distance(placePosition)).Take(3).ToList();
+            //check if there is a station with bikes
+            //get the closest station with GetTrajet(convertPosition(closestToStart.position), convertPosition(closestToEnd.position), "cycling-road");
+            Station closestStation = closestStations.OrderBy(station => GetTrajet(convertPosition(station.position), placePosition, "cycling-road").Count).First();
+
             return closestStation;
         }
 

@@ -1,0 +1,167 @@
+[10/12/2023 20:50:52] - Stations deserialized : nb station 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 20:59:09] - Stations deserialized : nb station 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 20:59:50] - Stations deserialized : nb station 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 21:14:40] - Error in GetallStations method: System.IO.FileLoadException: Impossible de charger le fichier ou l'assembly 'System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' ou une de ses dépendances. La définition trouvée du manifeste de l'assembly ne correspond pas à la référence de l'assembly. (Exception de HRESULT : 0x80131040)
+Nom de fichier : 'System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'
+   à System.MemoryExtensions.AsSpan(String text)
+   à System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   à ProxyCache2.JCDStationProxy.deserializeStations(String jsonString) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\ProxyCache2\JCDStationProxy.cs:ligne 62
+   à ProxyCache2.JCDStationProxy.GetallStations() dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\ProxyCache2\JCDStationProxy.cs:ligne 49
+
+AVT : la journalisation de liaison d'assembly est désactivée.
+Pour activer la journalisation des échecs de liaison d'assembly, attribuez la valeur 1 à la valeur de Registre [HKLM\Software\Microsoft\Fusion!EnableLog] (DWORD).
+Remarque : une certaine perte de performance est associée à l'enregistrement dans le journal des échecs de liaison d'assembly.
+Pour désactiver cette fonctionnalité, supprimez la valeur de Registre [HKLM\Software\Microsoft\Fusion!EnableLog].
+
+[10/12/2023 21:17:14] - Error in GetallStations method: System.IO.FileLoadException: Impossible de charger le fichier ou l'assembly 'System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' ou une de ses dépendances. La définition trouvée du manifeste de l'assembly ne correspond pas à la référence de l'assembly. (Exception de HRESULT : 0x80131040)
+Nom de fichier : 'System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'
+   à System.MemoryExtensions.AsSpan(String text)
+   à System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   à ProxyCache2.JCDStationProxy.deserializeStations(String jsonString) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\ProxyCache2\JCDStationProxy.cs:ligne 62
+   à ProxyCache2.JCDStationProxy.GetallStations() dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\ProxyCache2\JCDStationProxy.cs:ligne 49
+
+AVT : la journalisation de liaison d'assembly est désactivée.
+Pour activer la journalisation des échecs de liaison d'assembly, attribuez la valeur 1 à la valeur de Registre [HKLM\Software\Microsoft\Fusion!EnableLog] (DWORD).
+Remarque : une certaine perte de performance est associée à l'enregistrement dans le journal des échecs de liaison d'assembly.
+Pour désactiver cette fonctionnalité, supprimez la valeur de Registre [HKLM\Software\Microsoft\Fusion!EnableLog].
+
+[10/12/2023 21:19:23] - Stations deserialized : nb station 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 21:21:19] - Stations deserialized : nb station 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 22:47:48] - Error in init : System.ServiceModel.CommunicationException: Le quota de taille maximale autorisée pour les messages entrants (65536) a été dépassé. Pour augmenter le quota, utilisez la propriété MaxReceivedMessageSize sur l'élément de la liaison appropriée. ---> System.ServiceModel.QuotaExceededException: Le quota de taille maximale autorisée pour les messages entrants (65536) a été dépassé. Pour augmenter le quota, utilisez la propriété MaxReceivedMessageSize sur l'élément de la liaison appropriée.
+   --- Fin de la trace de la pile d'exception interne ---
+
+Server stack trace: 
+   à System.ServiceModel.Channels.HttpInput.ThrowMaxReceivedMessageSizeExceeded()
+   à System.ServiceModel.Channels.HttpInput.GetMessageBuffer()
+   à System.ServiceModel.Channels.HttpInput.ReadBufferedMessage(Stream inputStream)
+   à System.ServiceModel.Channels.HttpInput.ParseIncomingMessage(HttpRequestMessage httpRequestMessage, Exception& requestException)
+   à System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.WaitForReply(TimeSpan timeout)
+   à System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   à System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   à System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   à System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   à System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   à RoutingServer.ServiceReference1.IService1.GetStations()
+   à RoutingServer.ServiceReference1.Service1Client.GetStations() dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Connected Services\ServiceReference1\Reference.cs:ligne 337
+   à RoutingServer.Service1..ctor() dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 29
+[10/12/2023 22:47:49] - Error in GetBestTrajet method: System.ArgumentNullException: La valeur ne peut pas être null.
+Nom du paramètre : source
+   à System.Linq.OrderedEnumerable`2..ctor(IEnumerable`1 source, Func`2 keySelector, IComparer`1 comparer, Boolean descending)
+   à System.Linq.Enumerable.OrderBy[TSource,TKey](IEnumerable`1 source, Func`2 keySelector)
+   à RoutingServer.Service1.getClosestStationFromPlace(String place) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 104
+   à RoutingServer.Service1.RoutingServer.IService1.GetBestTrajet(String start, String end) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 44
+[10/12/2023 22:49:07] - Error in init : System.ServiceModel.CommunicationException: Le quota de taille maximale autorisée pour les messages entrants (65536) a été dépassé. Pour augmenter le quota, utilisez la propriété MaxReceivedMessageSize sur l'élément de la liaison appropriée. ---> System.ServiceModel.QuotaExceededException: Le quota de taille maximale autorisée pour les messages entrants (65536) a été dépassé. Pour augmenter le quota, utilisez la propriété MaxReceivedMessageSize sur l'élément de la liaison appropriée.
+   --- Fin de la trace de la pile d'exception interne ---
+
+Server stack trace: 
+   à System.ServiceModel.Channels.HttpInput.ThrowMaxReceivedMessageSizeExceeded()
+   à System.ServiceModel.Channels.HttpInput.GetMessageBuffer()
+   à System.ServiceModel.Channels.HttpInput.ReadBufferedMessage(Stream inputStream)
+   à System.ServiceModel.Channels.HttpInput.ParseIncomingMessage(HttpRequestMessage httpRequestMessage, Exception& requestException)
+   à System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.WaitForReply(TimeSpan timeout)
+   à System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   à System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   à System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   à System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   à System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   à RoutingServer.ServiceReference1.IService1.GetStations()
+   à RoutingServer.ServiceReference1.Service1Client.GetStations() dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Connected Services\ServiceReference1\Reference.cs:ligne 337
+   à RoutingServer.Service1..ctor() dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 29
+[10/12/2023 22:50:53] - Error in init : System.ServiceModel.CommunicationException: Le quota de taille maximale autorisée pour les messages entrants (65536) a été dépassé. Pour augmenter le quota, utilisez la propriété MaxReceivedMessageSize sur l'élément de la liaison appropriée. ---> System.ServiceModel.QuotaExceededException: Le quota de taille maximale autorisée pour les messages entrants (65536) a été dépassé. Pour augmenter le quota, utilisez la propriété MaxReceivedMessageSize sur l'élément de la liaison appropriée.
+   --- Fin de la trace de la pile d'exception interne ---
+
+Server stack trace: 
+   à System.ServiceModel.Channels.HttpInput.ThrowMaxReceivedMessageSizeExceeded()
+   à System.ServiceModel.Channels.HttpInput.GetMessageBuffer()
+   à System.ServiceModel.Channels.HttpInput.ReadBufferedMessage(Stream inputStream)
+   à System.ServiceModel.Channels.HttpInput.ParseIncomingMessage(HttpRequestMessage httpRequestMessage, Exception& requestException)
+   à System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.WaitForReply(TimeSpan timeout)
+   à System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   à System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   à System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   à System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   à System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   à RoutingServer.ServiceReference1.IService1.GetStations()
+   à RoutingServer.ServiceReference1.Service1Client.GetStations() dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Connected Services\ServiceReference1\Reference.cs:ligne 337
+   à RoutingServer.Service1..ctor() dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 29
+[10/12/2023 22:59:15] - Error in GetBestTrajet method: System.ArgumentOutOfRangeException: La valeur du paramètre doit être comprise entre -90.0 et 90.0.
+Nom du paramètre : Latitude
+   à System.Device.Location.GeoCoordinate.set_Latitude(Double value)
+   à System.Device.Location.GeoCoordinate..ctor(Double latitude, Double longitude, Double altitude, Double horizontalAccuracy, Double verticalAccuracy, Double speed, Double course)
+   à System.Device.Location.GeoCoordinate..ctor(Double latitude, Double longitude)
+   à OSMRoutingClient.Position.distance(Position position) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\OSMRoutingClient\OSMRoutingClient.cs:ligne 101
+   à RoutingServer.Service1.<>c__DisplayClass10_0.<getClosestStationFromPlace>b__0(Station station) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 108
+   à System.Linq.EnumerableSorter`2.ComputeKeys(TElement[] elements, Int32 count)
+   à System.Linq.EnumerableSorter`1.Sort(TElement[] elements, Int32 count)
+   à System.Linq.OrderedEnumerable`1.<GetEnumerator>d__1.MoveNext()
+   à System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
+   à RoutingServer.Service1.getClosestStationFromPlace(String place) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 108
+   à RoutingServer.Service1.RoutingServer.IService1.GetBestTrajet(String start, String end) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 48
+[10/12/2023 23:02:18] - Error in GetBestTrajet method: System.AggregateException: Une ou plusieurs erreurs se sont produites. ---> System.Net.Http.HttpRequestException: Le code d'état de réponse n'indique pas la réussite : 404 (Not Found).
+   à System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   à System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   à System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   à OSMRoutingClient.OSMRoutingClient.<getRoute>d__6.MoveNext() dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\OSMRoutingClient\OSMRoutingClient.cs:ligne 47
+   --- Fin de la trace de la pile d'exception interne ---
+   à System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   à RoutingServer.Service1.GetTrajet(Position start, Position end, String mode) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 98
+   à RoutingServer.Service1.RoutingServer.IService1.GetBestTrajet(String start, String end) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 54
+---> (Exception interne #0) System.Net.Http.HttpRequestException: Le code d'état de réponse n'indique pas la réussite : 404 (Not Found).
+   à System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   à System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   à System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   à OSMRoutingClient.OSMRoutingClient.<getRoute>d__6.MoveNext() dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\OSMRoutingClient\OSMRoutingClient.cs:ligne 47<---
+
+[10/12/2023 23:10:25] - Error in GetBestTrajet method: System.AggregateException: Une ou plusieurs erreurs se sont produites. ---> System.Net.Http.HttpRequestException: Le code d'état de réponse n'indique pas la réussite : 404 (Not Found).
+   à System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   à System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   à System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   à OSMRoutingClient.OSMRoutingClient.<getRoute>d__6.MoveNext() dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\OSMRoutingClient\OSMRoutingClient.cs:ligne 47
+   --- Fin de la trace de la pile d'exception interne ---
+   à System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)
+   à RoutingServer.Service1.GetTrajet(Position start, Position end, String mode) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 98
+   à RoutingServer.Service1.RoutingServer.IService1.GetBestTrajet(String start, String end) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 54
+---> (Exception interne #0) System.Net.Http.HttpRequestException: Le code d'état de réponse n'indique pas la réussite : 404 (Not Found).
+   à System.Runtime.ExceptionServices.ExceptionDispatchInfo.Throw()
+   à System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   à System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   à OSMRoutingClient.OSMRoutingClient.<getRoute>d__6.MoveNext() dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\OSMRoutingClient\OSMRoutingClient.cs:ligne 47<---
+
+[10/12/2023 23:15:38] - Error in GetBestTrajet method: System.ArgumentOutOfRangeException: La valeur du paramètre doit être comprise entre -90.0 et 90.0.
+Nom du paramètre : Latitude
+   à System.Device.Location.GeoCoordinate.set_Latitude(Double value)
+   à System.Device.Location.GeoCoordinate..ctor(Double latitude, Double longitude, Double altitude, Double horizontalAccuracy, Double verticalAccuracy, Double speed, Double course)
+   à System.Device.Location.GeoCoordinate..ctor(Double latitude, Double longitude)
+   à OSMRoutingClient.Position.distance(Position position) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\OSMRoutingClient\OSMRoutingClient.cs:ligne 101
+   à RoutingServer.Service1.<>c__DisplayClass10_0.<getClosestStationFromPlace>b__0(Station station) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 108
+   à System.Linq.EnumerableSorter`2.ComputeKeys(TElement[] elements, Int32 count)
+   à System.Linq.EnumerableSorter`1.Sort(TElement[] elements, Int32 count)
+   à System.Linq.OrderedEnumerable`1.<GetEnumerator>d__1.MoveNext()
+   à System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
+   à RoutingServer.Service1.getClosestStationFromPlace(String place) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 108
+   à RoutingServer.Service1.RoutingServer.IService1.GetBestTrajet(String start, String end) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 48
+[10/12/2023 23:22:02] - Error in GetBestTrajet method: System.ArgumentOutOfRangeException: La valeur du paramètre doit être comprise entre -90.0 et 90.0.
+Nom du paramètre : Latitude
+   à System.Device.Location.GeoCoordinate.set_Latitude(Double value)
+   à System.Device.Location.GeoCoordinate..ctor(Double latitude, Double longitude, Double altitude, Double horizontalAccuracy, Double verticalAccuracy, Double speed, Double course)
+   à System.Device.Location.GeoCoordinate..ctor(Double latitude, Double longitude)
+   à OSMRoutingClient.Position.distance(Position position) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\OSMRoutingClient\OSMRoutingClient.cs:ligne 101
+   à RoutingServer.Service1.<>c__DisplayClass10_0.<getClosestStationFromPlace>b__0(Station station) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 109
+   à System.Linq.EnumerableSorter`2.ComputeKeys(TElement[] elements, Int32 count)
+   à System.Linq.EnumerableSorter`1.Sort(TElement[] elements, Int32 count)
+   à System.Linq.OrderedEnumerable`1.<GetEnumerator>d__1.MoveNext()
+   à System.Linq.Enumerable.First[TSource](IEnumerable`1 source)
+   à RoutingServer.Service1.getClosestStationFromPlace(String place) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 109
+   à RoutingServer.Service1.RoutingServer.IService1.GetBestTrajet(String start, String end) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 48

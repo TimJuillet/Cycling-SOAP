@@ -22,16 +22,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javafx.scene.paint.Color.RED;
 
 public class GluonMapExample extends Application {
     String start;
     String end;
     private final ListView<String> directions = new ListView<>();
-    private final  VBox controls = new VBox();
+    private final VBox controls = new VBox();
     private final Service1 service1 = new Service1();
     private final TextField searchField = new TextField();
-    private final ArrayList<RouteLayer> routeLayers = new ArrayList<RouteLayer>();
+    private final List<RouteLayer> routeLayers = List.of(new RouteLayer(List.of(), Color.RED), new RouteLayer(List.of(), Color.BLUE), new RouteLayer(List.of(), Color.RED));
     private MapView mapView;
 
 
@@ -40,8 +39,28 @@ public class GluonMapExample extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
-
+    public void start(Stage stage) throws IOException {/*
+    _______AAAA____j_o_a_n____AAAA________
+           VVVV               VVVV
+           (__)               (__)
+            \ \               / /
+             \ \   \\|||//   / /
+              > \   _   _   / <
+     hang      > \ / \ / \ / <
+      in        > \\_o_o_// <
+      there...   > ( (_) ) <
+                  >|     |<
+                 / |\___/| \
+                 / (_____) \
+                 /         \
+                  /   o   \
+                   ) ___ (
+                  / /   \ \
+                 ( /     \ )
+                 ><       ><
+                ///\     /\\\
+                '''       '''
+ */
 
         System.setProperty("javafx.platform", "desktop");
         System.setProperty("http.agent", "Gluon Mobile/1.0.3");
@@ -55,6 +74,7 @@ public class GluonMapExample extends Application {
         /* Création et ajoute une couche à la carte */
 
         //mapView.addLayer(routeLayer);
+        routeLayers.forEach(mapView::addLayer);
 
         mapView.setZoom(10);
         mapView.flyTo(0, new MapPoint(43.61551, 7.07170), 0.1);
@@ -98,26 +118,113 @@ public class GluonMapExample extends Application {
             }
 
             if (start != null && end != null) {
-                    ArrayOfArrayOfPosition points = new ArrayOfArrayOfPosition();
-                    points = service1.getBasicHttpBindingIService1().getBestTrajet(start, end);
-                    //transformer points en liste de MapPoint
-                    System.out.println(points.getArrayOfPosition().size());
-                    points.getArrayOfPosition().forEach(arrayOfPosition -> {
-                        List<MapPoint> pointsList = new ArrayList<>();
-                        // add a routeLayer for each route, with a different color
-                        RouteLayer routeLayer = new RouteLayer(new ArrayList<>(), Color.rgb((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255)));
-                        arrayOfPosition.getPosition().forEach(position -> {
-                            pointsList.add(new MapPoint(position.getLatitude(), position.getLongitude()));
-                        });
-                        routeLayer.setPoints(pointsList);
-                        routeLayers.add(routeLayer);
-                    });
-                   // directions.setItems(FXCollections.observableArrayList(or.getRouteInstructions(start, end)));
-                for(RouteLayer routeLayer : routeLayers){
-                    mapView.addLayer(routeLayer);
+                ArrayOfArrayOfPosition points = new ArrayOfArrayOfPosition();
+                points = service1.getBasicHttpBindingIService1().getBestTrajet(start, end);
+
+                if (points.getArrayOfPosition().size() == 1) {
+                    routeLayers.get(0).setPoints(List.of());
+                    routeLayers.get(0)
+                    routeLayers.get(2).setPoints(List.of());
+                    routeLayers.get(1).setPoints(points.getArrayOfPosition().get(0).getPosition().stream().map(position -> new MapPoint(position.getLatitude(), position.getLongitude())).toList());
+                }
+
+                if (points.getArrayOfPosition().size() == 3) {
+                    routeLayers.get(0).setPoints(points.getArrayOfPosition().get(0).getPosition().stream().map(position -> new MapPoint(position.getLatitude(), position.getLongitude())).toList());
+                    routeLayers.get(1).setPoints(points.getArrayOfPosition().get(1).getPosition().stream().map(position -> new MapPoint(position.getLatitude(), position.getLongitude())).toList());
+                    routeLayers.get(2).setPoints(points.getArrayOfPosition().get(2).getPosition().stream().map(position -> new MapPoint(position.getLatitude(), position.getLongitude())).toList());
                 }
             }
         }
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+`;-.          ___,
+  `.`\_...._/`.-"`
+    \        /      ,
+    /()   () \    .' `-._
+   |)  .    ()\  /   _.'
+   \  -'-     ,; '. <
+    ;.__     ,;|   > \
+   / ,    / ,  |.-'.-'
+  (_/    (_/ ,;|.<`
+    \    ,     ;-`
+     >   \    /
+    (_,-'`> .'
+         (_,'
+ */

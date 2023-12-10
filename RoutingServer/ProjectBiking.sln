@@ -5,17 +5,20 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoutingServer", "RoutingServer\RoutingServer.csproj", "{CCFA7334-62DA-445E-B896-0139A4459AE8}"
 	ProjectSection(ProjectDependencies) = postProject
-		{8BED9740-DA19-4796-BAB2-8C1943AB7BF0} = {8BED9740-DA19-4796-BAB2-8C1943AB7BF0}
+		{38DAB6F6-09BD-43B7-8440-447C4F5DFB66} = {38DAB6F6-09BD-43B7-8440-447C4F5DFB66}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OSMRoutingClient", "OSMRoutingClient\OSMRoutingClient.csproj", "{324C6F70-EF65-4526-B5EC-469CF484C601}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientTest", "ClientTest\ClientTest.csproj", "{F82E4B1C-EF2E-46AE-9DC6-D92C2BC8C14D}"
 	ProjectSection(ProjectDependencies) = postProject
+		{38DAB6F6-09BD-43B7-8440-447C4F5DFB66} = {38DAB6F6-09BD-43B7-8440-447C4F5DFB66}
 		{CCFA7334-62DA-445E-B896-0139A4459AE8} = {CCFA7334-62DA-445E-B896-0139A4459AE8}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyCache", "ProxyCache\ProxyCache.csproj", "{8BED9740-DA19-4796-BAB2-8C1943AB7BF0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IO.Swagger", "IO.Swagger\IO.Swagger.csproj", "{F205B892-955A-4035-8092-0F0640B4D6AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyCacheSwagg", "ProxyCacheSwagg\ProxyCacheSwagg.csproj", "{38DAB6F6-09BD-43B7-8440-447C4F5DFB66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +38,14 @@ Global
 		{F82E4B1C-EF2E-46AE-9DC6-D92C2BC8C14D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F82E4B1C-EF2E-46AE-9DC6-D92C2BC8C14D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F82E4B1C-EF2E-46AE-9DC6-D92C2BC8C14D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8BED9740-DA19-4796-BAB2-8C1943AB7BF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8BED9740-DA19-4796-BAB2-8C1943AB7BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8BED9740-DA19-4796-BAB2-8C1943AB7BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8BED9740-DA19-4796-BAB2-8C1943AB7BF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F205B892-955A-4035-8092-0F0640B4D6AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F205B892-955A-4035-8092-0F0640B4D6AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F205B892-955A-4035-8092-0F0640B4D6AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F205B892-955A-4035-8092-0F0640B4D6AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38DAB6F6-09BD-43B7-8440-447C4F5DFB66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38DAB6F6-09BD-43B7-8440-447C4F5DFB66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38DAB6F6-09BD-43B7-8440-447C4F5DFB66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38DAB6F6-09BD-43B7-8440-447C4F5DFB66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

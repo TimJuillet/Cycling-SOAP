@@ -40,7 +40,7 @@ namespace OSMRoutingClient
         
         async public Task<List<Position>> getRoute(Position start, Position end, string mode)
         {
-            string url = getUrl("v2/directions/" + mode) + "&start=" + start.getLatitudeString() + "," + start.getLongitudeString() + "&end=" + end.getLatitudeString() + "," + end.getLongitudeString();
+            string url = getUrl("v2/directions/" + mode) + "&start=" + start.getLongitudeString() + "," + start.getLatitudeString() + "&end=" + end.getLongitudeString() + "," + end.getLatitudeString();
             
             Console.WriteLine(url);
             
@@ -67,7 +67,7 @@ namespace OSMRoutingClient
             string json = await client.GetStringAsync(url);
             dynamic o = JsonConvert.DeserializeObject(json);
            
-            return new Position(o.features[0].geometry.coordinates[0].ToObject<double>(), o.features[0].geometry.coordinates[1].ToObject<double>());
+            return new Position(o.features[0].geometry.coordinates[1].ToObject<double>(), o.features[0].geometry.coordinates[0].ToObject<double>());
         }
     }
 

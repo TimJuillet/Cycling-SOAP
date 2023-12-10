@@ -16,18 +16,7 @@ namespace ProxyCacheJCD
     {
         private static readonly ObjectCache cache = MemoryCache.Default;
 
-        static void Main(string[] args)
-        {
-            // Display the number of command line arguments.
-            //Console.WriteLine(args.Length);
-            // Do a test
-            //JCDStationProxy client = new JCDStationProxy();
-            //IJCDStationsProxy proxy = new JCDStationProxy();
-            //List<Station> stations = proxy.GetallStations();
-            //Console.WriteLine(stations);
-        }
-
-        public JCDStationProxy() { }
+        JCDStationProxy() { }
 
 
         /*
@@ -48,7 +37,7 @@ namespace ProxyCacheJCD
         }
         */
 
-        async public Task<List<Station>> asyncgetStations()
+        public List<Station> GetallStations()
         {
             List<Station> allstations = cache.Get("allStations") as List<Station>;
             if (allstations == null)
@@ -56,8 +45,8 @@ namespace ProxyCacheJCD
                 try
                 {
                     HttpClient httpClient = new HttpClient();
-                    HttpResponseMessage response = await httpClient.GetAsync($"https://api.jcdecaux.com/vls/v3/stations?apiKey=882e4ad9152fe8084440b76ad14cb9f55cc3d483");
-                    var jsonResponse = await response.Content.ReadAsStringAsync();
+                    HttpResponseMessage response = httpClient.GetAsync($"https://api.jcdecaux.com/vls/v3/stations?apiKey=882e4ad9152fe8084440b76ad14cb9f55cc3d483").Result;
+                    var jsonResponse = response.Content.ReadAsStringAsync().Result;
                     allstations = deserializeStations(jsonResponse);
                     cache.Add("allStations", allstations, ObjectCache.InfiniteAbsoluteExpiration);
                 }
@@ -67,11 +56,6 @@ namespace ProxyCacheJCD
                 }
             }
             return allstations;
-        }
-
-        List<Station> IJCDStationsProxy.GetallStations()
-        {
-            return asyncgetStations().Result;
         }
 
         public List<Station> deserializeStations(string jsonString)
@@ -96,7 +80,6 @@ namespace ProxyCacheJCD
                 Console.WriteLine($"Failed to log error: {logEx.Message}");
             }
         }
-
     }
 
 
