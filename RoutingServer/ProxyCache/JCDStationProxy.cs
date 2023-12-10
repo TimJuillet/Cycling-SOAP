@@ -1,19 +1,20 @@
-﻿using System;
+﻿using ProxyCache;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.Caching;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Collections.Specialized.BitVector32;
 
-namespace JCDecauxClient
+namespace ProxyCache
 {
-    public class JCDecauxClient
+    public class JCDStationProxy : IJCDStationsProxy
     {
         private static readonly ObjectCache cache = MemoryCache.Default;
-
 
         static void Main(string[] args)
         {
@@ -25,7 +26,7 @@ namespace JCDecauxClient
             //Console.WriteLine(contracts);
         }
 
-        public JCDecauxClient() { }
+        public JCDStationProxy() { }
 
 
         /*
@@ -47,7 +48,7 @@ namespace JCDecauxClient
         */
 
 
-        public List<Station> GetallStations()
+        List<Station> IJCDStationsProxy.GetallStations()
         {
             List<Station> allstations = cache.Get("allStations") as List<Station>;
             if (allstations == null)
@@ -66,18 +67,21 @@ namespace JCDecauxClient
             List<Station> stations = System.Text.Json.JsonSerializer.Deserialize<List<Station>>(jsonString);
             return stations;
         }
+     
     }
 }
-
 
 public class Contract
 {
     public string name { get; set; }
 }
 
+[DataContract]
 public class Station
 {
+    [DataMember(Name = "name")]
     public string name { get; set; }
+    [DataMember(Name = "position")]
     public OSMRoutingClient.Position position { get; set; }
 }
 

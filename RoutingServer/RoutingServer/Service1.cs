@@ -1,5 +1,5 @@
-﻿using JCDecauxClient;
-using OSMRoutingClient;
+﻿using OSMRoutingClient;
+using RoutingServer.JCDecauxStationsProxy;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,21 +21,14 @@ namespace RoutingServer
 
         public Service1()
         {
-            InitializeAsync().Wait(); // Wait synchronously for initialization
+            InitializeAsync(); // Wait synchronously for initialization
         }
 
-        private async Task InitializeAsync()
+        private void InitializeAsync()
         {
             client = new OSMRoutingClient.OSMRoutingClient();
-            JCDecauxClient.JCDecauxClient jcDecauxClient = new JCDecauxClient.JCDecauxClient();
-            try
-            {
-                allStations = await jcDecauxClient.GetAllStationsFromAllContracts();
-            }
-            catch (Exception ex)
-            {
-                LogError("Error during initialization", ex);
-            }
+            JCDStationsProxyClient jCDStationsProxyClient = new JCDStationsProxyClient();
+            allStations = jCDStationsProxyClient.GetallStations().ToList();
         }
 
         List<List<Position>> IService1.GetBestTrajet(String start, String end)
