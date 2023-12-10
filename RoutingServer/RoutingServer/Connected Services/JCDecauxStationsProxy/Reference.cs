@@ -15,15 +15,58 @@ namespace RoutingServer.JCDecauxStationsProxy {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Station", Namespace="http://schemas.datacontract.org/2004/07/")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Station", Namespace="http://schemas.datacontract.org/2004/07/ProxyCache")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(RoutingServer.JCDecauxStationsProxy.Station[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(RoutingServer.JCDecauxStationsProxy.MainStands))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(RoutingServer.JCDecauxStationsProxy.TotalStands))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(OSMRoutingClient.Position))]
     public partial class Station : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string nameField;
+        private string AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool BikeStandsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool BonusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ConnectedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ContractNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime LastUpdateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private RoutingServer.JCDecauxStationsProxy.MainStands MainStandsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool OverflowField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private object OverflowStandsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private object ShapeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private RoutingServer.JCDecauxStationsProxy.TotalStands TotalStandsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int numberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private OSMRoutingClient.Position positionField;
@@ -39,14 +82,183 @@ namespace RoutingServer.JCDecauxStationsProxy {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string name {
+        public string Address {
             get {
-                return this.nameField;
+                return this.AddressField;
             }
             set {
-                if ((object.ReferenceEquals(this.nameField, value) != true)) {
-                    this.nameField = value;
-                    this.RaisePropertyChanged("name");
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool BikeStands {
+            get {
+                return this.BikeStandsField;
+            }
+            set {
+                if ((this.BikeStandsField.Equals(value) != true)) {
+                    this.BikeStandsField = value;
+                    this.RaisePropertyChanged("BikeStands");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Bonus {
+            get {
+                return this.BonusField;
+            }
+            set {
+                if ((this.BonusField.Equals(value) != true)) {
+                    this.BonusField = value;
+                    this.RaisePropertyChanged("Bonus");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Connected {
+            get {
+                return this.ConnectedField;
+            }
+            set {
+                if ((this.ConnectedField.Equals(value) != true)) {
+                    this.ConnectedField = value;
+                    this.RaisePropertyChanged("Connected");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ContractName {
+            get {
+                return this.ContractNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ContractNameField, value) != true)) {
+                    this.ContractNameField = value;
+                    this.RaisePropertyChanged("ContractName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime LastUpdate {
+            get {
+                return this.LastUpdateField;
+            }
+            set {
+                if ((this.LastUpdateField.Equals(value) != true)) {
+                    this.LastUpdateField = value;
+                    this.RaisePropertyChanged("LastUpdate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public RoutingServer.JCDecauxStationsProxy.MainStands MainStands {
+            get {
+                return this.MainStandsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MainStandsField, value) != true)) {
+                    this.MainStandsField = value;
+                    this.RaisePropertyChanged("MainStands");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Overflow {
+            get {
+                return this.OverflowField;
+            }
+            set {
+                if ((this.OverflowField.Equals(value) != true)) {
+                    this.OverflowField = value;
+                    this.RaisePropertyChanged("Overflow");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public object OverflowStands {
+            get {
+                return this.OverflowStandsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OverflowStandsField, value) != true)) {
+                    this.OverflowStandsField = value;
+                    this.RaisePropertyChanged("OverflowStands");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public object Shape {
+            get {
+                return this.ShapeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ShapeField, value) != true)) {
+                    this.ShapeField = value;
+                    this.RaisePropertyChanged("Shape");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public RoutingServer.JCDecauxStationsProxy.TotalStands TotalStands {
+            get {
+                return this.TotalStandsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TotalStandsField, value) != true)) {
+                    this.TotalStandsField = value;
+                    this.RaisePropertyChanged("TotalStands");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int number {
+            get {
+                return this.numberField;
+            }
+            set {
+                if ((this.numberField.Equals(value) != true)) {
+                    this.numberField = value;
+                    this.RaisePropertyChanged("number");
                 }
             }
         }
@@ -61,6 +273,64 @@ namespace RoutingServer.JCDecauxStationsProxy {
                     this.positionField = value;
                     this.RaisePropertyChanged("position");
                 }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="MainStands", Namespace="http://schemas.datacontract.org/2004/07/ProxyCache")]
+    [System.SerializableAttribute()]
+    public partial class MainStands : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TotalStands", Namespace="http://schemas.datacontract.org/2004/07/ProxyCache")]
+    [System.SerializableAttribute()]
+    public partial class TotalStands : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
             }
         }
         

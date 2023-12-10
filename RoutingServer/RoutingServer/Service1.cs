@@ -21,15 +21,18 @@ namespace RoutingServer
 
         public Service1()
         {
-            InitializeAsync(); // Wait synchronously for initialization
+            try
+            {
+                client = new OSMRoutingClient.OSMRoutingClient();
+                JCDStationsProxyClient jCDStationsProxyClient = new JCDStationsProxyClient();
+                LogError("call proxy", new Exception());
+                allStations = jCDStationsProxyClient.GetallStations().ToList();
+            } catch (Exception ex)
+            {
+                LogError("Error in Service1 constructor", ex);
+            }
         }
 
-        private void InitializeAsync()
-        {
-            client = new OSMRoutingClient.OSMRoutingClient();
-            JCDStationsProxyClient jCDStationsProxyClient = new JCDStationsProxyClient();
-            allStations = jCDStationsProxyClient.GetallStations().ToList();
-        }
 
         List<List<Position>> IService1.GetBestTrajet(String start, String end)
         {

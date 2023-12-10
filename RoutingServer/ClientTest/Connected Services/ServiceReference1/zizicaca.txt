@@ -1,12 +1,32 @@
-[09/12/2023 16:31:56] - print all stations nb 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
-[09/12/2023 16:31:56] - print all stations nb 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
-[09/12/2023 16:31:58] - GetTraject : there are 8173: System.Exception: nb of positions
-[09/12/2023 16:32:03] - GetTraject : there are 13105: System.Exception: nb of positions
-[09/12/2023 16:32:03] - GetTraject : there are 1: System.Exception: nb of positions
-[09/12/2023 16:32:08] - GetTraject : there are 11753: System.Exception: nb of positions
-[09/12/2023 16:36:52] - print all stations nb 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
-[09/12/2023 16:36:52] - print all stations nb 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
-[09/12/2023 16:36:55] - GetTraject : there are 8173: System.Exception: nb of positions
-[09/12/2023 16:36:57] - GetTraject : there are 13105: System.Exception: nb of positions
-[09/12/2023 16:36:57] - GetTraject : there are 1: System.Exception: nb of positions
-[09/12/2023 16:37:00] - GetTraject : there are 11753: System.Exception: nb of positions
+[10/12/2023 14:58:52] - call proxy: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 14:58:56] - Stations deserialized : nb station 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 14:58:56] - Error in Service1 constructor: System.ServiceModel.CommunicationException: Le quota de taille maximale autorisée pour les messages entrants (65536) a été dépassé. Pour augmenter le quota, utilisez la propriété MaxReceivedMessageSize sur l'élément de la liaison appropriée. ---> System.ServiceModel.QuotaExceededException: Le quota de taille maximale autorisée pour les messages entrants (65536) a été dépassé. Pour augmenter le quota, utilisez la propriété MaxReceivedMessageSize sur l'élément de la liaison appropriée.
+   --- Fin de la trace de la pile d'exception interne ---
+
+Server stack trace: 
+   à System.ServiceModel.Channels.HttpInput.ThrowMaxReceivedMessageSizeExceeded()
+   à System.ServiceModel.Channels.HttpInput.GetMessageBuffer()
+   à System.ServiceModel.Channels.HttpInput.ReadBufferedMessage(Stream inputStream)
+   à System.ServiceModel.Channels.HttpInput.ParseIncomingMessage(HttpRequestMessage httpRequestMessage, Exception& requestException)
+   à System.ServiceModel.Channels.HttpChannelFactory`1.HttpRequestChannel.HttpChannelRequest.WaitForReply(TimeSpan timeout)
+   à System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   à System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   à System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   à System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   à System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   à System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   à RoutingServer.JCDecauxStationsProxy.IJCDStationsProxy.GetallStations()
+   à RoutingServer.JCDecauxStationsProxy.JCDStationsProxyClient.GetallStations() dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Connected Services\JCDecauxStationsProxy\Reference.cs:ligne 386
+   à RoutingServer.Service1..ctor() dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 29
+[10/12/2023 14:58:58] - Error in GetBestTrajet method: System.NullReferenceException: La référence d'objet n'est pas définie à une instance d'un objet.
+   à RoutingServer.Service1.getClosestStationFromPlace(String place) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 90
+   à RoutingServer.Service1.RoutingServer.IService1.GetBestTrajet(String start, String end) dans C:\Users\astag\source\repos\ProjectBiking\RoutingServer\RoutingServer\Service1.cs:ligne 41
+[10/12/2023 15:01:04] - call proxy: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 15:01:06] - Stations deserialized : nb station 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 15:01:48] - call proxy: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 15:01:50] - Stations deserialized : nb station 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 15:05:37] - call proxy: System.Exception: Une exception de type 'System.Exception' a été levée.
+[10/12/2023 15:05:40] - Stations deserialized : nb station 2393: System.Exception: Une exception de type 'System.Exception' a été levée.
