@@ -1,19 +1,17 @@
-﻿using Newtonsoft.Json.Converters;
-using ProxyCache;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.Caching;
 using System.Runtime.Serialization;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Collections.Specialized.BitVector32;
 
-namespace ProxyCache
+namespace ProxyCacheJCD
 {
+    // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service1" à la fois dans le code et le fichier de configuration.
     public class JCDStationProxy : IJCDStationsProxy
     {
         private static readonly ObjectCache cache = MemoryCache.Default;
@@ -62,13 +60,14 @@ namespace ProxyCache
                     var jsonResponse = await response.Content.ReadAsStringAsync();
                     allstations = deserializeStations(jsonResponse);
                     cache.Add("allStations", allstations, ObjectCache.InfiniteAbsoluteExpiration);
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     LogError("Error in GetallStations method", ex);
                 }
             }
             return allstations;
-        } 
+        }
 
         List<Station> IJCDStationsProxy.GetallStations()
         {

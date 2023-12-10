@@ -1,5 +1,5 @@
 ﻿using OSMRoutingClient;
-using RoutingServer.JCDecauxStationsProxy;
+using RoutingServer.ServiceReference1;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +16,7 @@ namespace RoutingServer
 
         public static OSMRoutingClient.OSMRoutingClient client;
         public static List<Station> allStations;
-        private static double bikeSpeed = 15;
+        private static double bikeSpeed = 50;
         private static double walkSpeed = 5;
 
         public Service1()
@@ -25,11 +25,10 @@ namespace RoutingServer
             {
                 client = new OSMRoutingClient.OSMRoutingClient();
                 JCDStationsProxyClient jCDStationsProxyClient = new JCDStationsProxyClient();
-                LogError("call proxy", new Exception());
+                // LogError("call proxy", new Exception());
                 allStations = jCDStationsProxyClient.GetallStations().ToList();
-            } catch (Exception ex)
-            {
-                LogError("Error in Service1 constructor", ex);
+            } catch(Exception e) {
+                LogError("Error in init ", e);
             }
         }
 
@@ -46,7 +45,8 @@ namespace RoutingServer
 
                 List<Position> WalkingtrajetFromBaseToFirstStation = GetTrajet(startPostion, closestToStart.position, "foot-walking");
                 List<Position> WalkingtrajetFromLastStationToEnd = GetTrajet(closestToEnd.position, endPosition, "foot-walking");
-                List<Position> trajetFromFirstStationToLastStation = GetTrajet(closestToStart.position, closestToEnd.position, "cycling-regular");
+                List<Position> trajetFromFirstStationToLastStation = GetTrajet(closestToStart.position, closestToEnd.position, "cycling-road");
+
                 List<Position> WalkingtrajectFromBaseToEnd = GetTrajet(startPostion, endPosition, "foot-walking");
 
                 if (isWalkingFaster(WalkingtrajetFromBaseToFirstStation, trajetFromFirstStationToLastStation, WalkingtrajetFromLastStationToEnd, WalkingtrajectFromBaseToEnd))
@@ -65,12 +65,23 @@ namespace RoutingServer
             }
         }
 
-        public Boolean isWalkingFaster(List<Position> WalkingtrajetFromBaseToFirstStation, List<Position> trajetFromFirstStationToLastStation, List<Position> WalkingtrajetFromLastStationToEnd, List<Position> WalkingtrajectFromBaseToEnd)
+        public bool isWalkingFaster(List<Position> WalkingtrajetFromBaseToFirstStation, List<Position> trajetFromFirstStationToLastStation, List<Position> WalkingtrajetFromLastStationToEnd, List<Position> WalkingtrajectFromBaseToEnd)
         {
-            double timeWalking = (Position.distance(WalkingtrajetFromBaseToFirstStation) + Position.distance(WalkingtrajetFromLastStationToEnd)) / walkSpeed;
-            double timeBiking = Position.distance(trajetFromFirstStationToLastStation) / bikeSpeed;
-            double timeWalkingFromBaseToEnd = Position.distance(WalkingtrajectFromBaseToEnd) / walkSpeed;
-            return timeWalkingFromBaseToEnd < timeWalking + timeBiking;
+            // Calculate distances in meters
+            double distanceWalking = Position.distance(WalkingtrajetFromBaseToFirstStation) + Position.distance(WalkingtrajetFromLastStationToEnd);
+            double distanceBiking = Position.distance(trajetFromFirstStationToLastStation);
+
+            // Calculate times in hours
+            double timeWalking = distanceWalking / walkSpeed; // in hours
+            double timeBiking = distanceBiking / bikeSpeed;   // in hours
+
+            double distanceWalkingFromBaseToEnd = Position.distance(WalkingtrajectFromBaseToEnd);
+
+            // Calculate time in hours
+            double timeWalkingFromBaseToEnd = distanceWalkingFromBaseToEnd / walkSpeed; // in hours
+
+            // Compare times
+            return timeWalkingFromBaseToEnd < (timeWalking + timeBiking);
         }
 
 
@@ -85,20 +96,8 @@ namespace RoutingServer
             // get the position of the place
             // compare the position of the place with the position of all the stations
             // return the closest station
-            Station closestStation = null;
             Position placePosition = client.getPosition(place).Result;
-            double minDistance = allStations[0].position.distance(placePosition);
-
-            foreach (Station station in allStations)
-            {
-                double distance = station.position.distance(placePosition);
-                if (distance < minDistance)
-                {
-                    minDistance = distance;
-                    closestStation = station;
-                }
-            }
-            
+            Station closestStation = allStations.OrderBy(station => station.position.distance(placePosition)).First();
             return closestStation;
         }
 
