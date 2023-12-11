@@ -18,6 +18,17 @@ namespace ProxyCacheSwagg
         private readonly MemoryCache _memoryCache;
         private readonly int _cacheDurationInSeconds;
 
+        public static void Main(string[] args)
+        {
+            System.ServiceModel.ServiceHost host = new System.ServiceModel.ServiceHost(typeof(Service1));
+
+            host.Open();
+
+            Console.WriteLine("The ProxyServer service is ready");
+            Console.WriteLine("Press <Enter> to stop the service.");
+            Console.ReadLine();
+        }
+
         Service1() : this("882e4ad9152fe8084440b76ad14cb9f55cc3d483", 3600)
         {
         }

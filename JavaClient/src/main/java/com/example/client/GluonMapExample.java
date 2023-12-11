@@ -4,14 +4,13 @@ import com.example.serverside.ArrayOfArrayOfPosition;
 import com.example.serverside.Service1;
 import com.gluonhq.maps.MapPoint;
 import com.gluonhq.maps.MapView;
-
+import javafx.scene.input.KeyEvent;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -123,15 +122,18 @@ public class GluonMapExample extends Application {
 
                 if (points.getArrayOfPosition().size() == 1) {
                     routeLayers.get(0).setPoints(List.of());
-                    routeLayers.get(0)
+                    mapView.removeLayer(routeLayers.get(0));
                     routeLayers.get(2).setPoints(List.of());
+                    mapView.removeLayer(routeLayers.get(2));
                     routeLayers.get(1).setPoints(points.getArrayOfPosition().get(0).getPosition().stream().map(position -> new MapPoint(position.getLatitude(), position.getLongitude())).toList());
                 }
 
                 if (points.getArrayOfPosition().size() == 3) {
                     routeLayers.get(0).setPoints(points.getArrayOfPosition().get(0).getPosition().stream().map(position -> new MapPoint(position.getLatitude(), position.getLongitude())).toList());
+                    mapView.addLayer(routeLayers.get(0));
                     routeLayers.get(1).setPoints(points.getArrayOfPosition().get(1).getPosition().stream().map(position -> new MapPoint(position.getLatitude(), position.getLongitude())).toList());
                     routeLayers.get(2).setPoints(points.getArrayOfPosition().get(2).getPosition().stream().map(position -> new MapPoint(position.getLatitude(), position.getLongitude())).toList());
+                    mapView.addLayer(routeLayers.get(2));
                 }
             }
         }

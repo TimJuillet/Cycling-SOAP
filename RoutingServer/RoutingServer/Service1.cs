@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +21,18 @@ namespace RoutingServer
         private static double walkSpeed = 5;
         BasicHttpBinding httpBindingBase;
 
+        //create main client
+        public static void Main(string[] args)
+        {
+            System.ServiceModel.ServiceHost host = new System.ServiceModel.ServiceHost(typeof(Service1));
+
+            host.Open();
+
+            Console.WriteLine("The RoutingServer service is ready");
+            Console.WriteLine("Press <Enter> to stop the service.");
+            Console.ReadLine();
+        }
+
         public Service1()
         {
             try
@@ -32,7 +45,7 @@ namespace RoutingServer
                 // LogError("call proxy", new Exception());
                 allStations = jCDStationsProxyClient.GetStations().ToList();
             } catch(Exception e) {
-                LogError("Error in init ", e);
+               // LogError("Error in init ", e);
             }
         }
 
@@ -68,7 +81,7 @@ namespace RoutingServer
             }
             catch (Exception ex)
             {
-                LogError("Error in GetBestTrajet method", ex);
+                //LogError("Error in GetBestTrajet method", ex);
                 return new List<List<Position>> { };
             }
         }
@@ -117,13 +130,13 @@ namespace RoutingServer
 
             return closestStation;
         }
-
+        /*
         public static void LogError(string message, Exception ex)
         {
             // Log the error to a file
             try
             {
-                using (StreamWriter writer = new StreamWriter("C:\\Users\\astag\\source\\repos\\ProjectBiking\\RoutingServer\\ClientTest\\Connected Services\\ServiceReference1\\zizicaca.txt", true))
+                using (StreamWriter writer = new StreamWriter("C:\\Users\\astag\\source\\repos\\ProjectBiking\\RoutingServer\\ClientTest\\Connected Services\\ServiceReference1\\tempDebug.txt", true))
                 {
                     writer.WriteLine($"[{DateTime.Now}] - {message}: {ex.ToString()}");
                 }
@@ -133,5 +146,6 @@ namespace RoutingServer
                 Console.WriteLine($"Failed to log error: {logEx.Message}");
             }
         }
+        */
     }
 }
