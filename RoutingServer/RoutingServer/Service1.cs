@@ -58,6 +58,8 @@ namespace RoutingServer
         {
             try
             {
+                Service1Client jCDStationsProxyClient = new Service1Client(httpBindingBase, new EndpointAddress("http://localhost:8733/Design_Time_Addresses/ProxyCacheSwagg/Service1/"));
+                allStations = jCDStationsProxyClient.GetStations().ToList();
                 Station closestToStart = getClosestStationFromPlace(start);
                 Station closestToEnd = getClosestStationFromPlace(end);
 

@@ -120,6 +120,10 @@ public class GluonMapExample extends Application {
                 ArrayOfArrayOfPosition points = new ArrayOfArrayOfPosition();
                 points = service1.getBasicHttpBindingIService1().getBestTrajet(start, end);
 
+                if(points.getArrayOfPosition().size() == 0){
+                    System.out.println("Aucun trajet trouvé");
+                }
+
                 if (points.getArrayOfPosition().size() == 1) {
                     routeLayers.get(0).setPoints(List.of());
                     mapView.removeLayer(routeLayers.get(0));
